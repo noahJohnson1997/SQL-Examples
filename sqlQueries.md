@@ -153,15 +153,15 @@ CREATE VIEW CustomerTransactions AS
 #### are complete.
 
 >SELECT *  
->FROM `EmployeeVisits`  
->WHERE `Notes for future visits` = 'Job Complete'  
+>FROM 'EmployeeVisits'  
+>WHERE 'Notes for future visits' = 'Job Complete'  
 
 
 #### This query shows all of the information relevant to visits which dealt with skunk removal.
 
 >SELECT *  
->FROM `EmployeeVisits`  
->WHERE `Service Offered` = "Skunk Removal"  
+>FROM 'EmployeeVisits'  
+>WHERE 'Service Offered' = "Skunk Removal"  
  
 
 	
