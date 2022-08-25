@@ -8,12 +8,12 @@
 
 >CREATE VIEW EmployeeVisits AS
 >  SELECT  
->    CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",  
->        visitId AS "Visit ID",  
->        servName AS "Service Offered",  
->        visitDesc AS "Visit Description",  
->        futureNotes AS "Notes for future visits",  
->        CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
+>: CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",  
+>: visitId AS "Visit ID",  
+>: servName AS "Service Offered",  
+>: visitDesc AS "Visit Description",  
+>: futureNotes AS "Notes for future visits",  
+>: CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
 >  FROM  
 >    visits  
 >    LEFT JOIN  
