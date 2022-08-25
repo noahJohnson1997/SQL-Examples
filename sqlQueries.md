@@ -6,7 +6,7 @@
 #### property. Without thisview, users would have a hard time cross referencing all of the 
 #### different ID's on the separate tables.
 
-CREATE VIEW EmployeeVisits AS
+"CREATE VIEW EmployeeVisits AS
 	SELECT
     	CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",
         visitId AS "Visit ID",
@@ -24,7 +24,7 @@ CREATE VIEW EmployeeVisits AS
         on customers.customerId = visits.customerId
     LEFT JOIN
     	services
-        on services.serviceId - visits.serviceId;
+        on services.serviceId - visits.serviceId;"
 
 #### The following view was also created to make information more accessible to users.
 #### The customer transaction view shows services offered, customer name, payment method,
