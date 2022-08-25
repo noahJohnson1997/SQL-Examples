@@ -1,10 +1,10 @@
 
 
-#The following view is used to make information about visits more accessible to users.
-#This view allows the user to see what employee visited which customers, what service was
-#offered, and gives a description of the visit as well as notes for future visits to the
-#property. Without thisview, users would have a hard time cross referencing all of the 
-#different ID's on the separate tables.
+# The following view is used to make information about visits more accessible to users.
+# This view allows the user to see what employee visited which customers, what service was
+# offered, and gives a description of the visit as well as notes for future visits to the
+# property. Without thisview, users would have a hard time cross referencing all of the 
+# different ID's on the separate tables.
 
 CREATE VIEW EmployeeVisits AS
 	SELECT
