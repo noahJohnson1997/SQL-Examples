@@ -7,24 +7,24 @@
 #### different ID's on the separate tables.
 
 >CREATE VIEW EmployeeVisits AS
->	SELECT
->    	CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",
->        visitId AS "Visit ID",
->        servName AS "Service Offered",
->        visitDesc AS "Visit Description",
->        futureNotes AS "Notes for future visits",
->        CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"
->    FROM
->    	visits
->    LEFT JOIN
->    	employees
->        on employees.employeeId = visits.employeeId
->    LEFT JOIN 
->    	customers
->        on customers.customerId = visits.customerId
->    LEFT JOIN
->    	services
->        on services.serviceId - visits.serviceId;"
+>	SELECT  
+>    	CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",  
+>        visitId AS "Visit ID",  
+>        servName AS "Service Offered",  
+>        visitDesc AS "Visit Description",  
+>        futureNotes AS "Notes for future visits",  
+>        CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
+>    FROM  
+>    	visits  
+>    LEFT JOIN  
+>    	employees  
+>        on employees.employeeId = visits.employeeId  
+>    LEFT JOIN   
+>    	customers  
+>        on customers.customerId = visits.customerId  
+>    LEFT JOIN  
+>    	services  
+>        on services.serviceId - visits.serviceId;"  
 
 #### The following view was also created to make information more accessible to users.
 #### The customer transaction view shows services offered, customer name, payment method,
