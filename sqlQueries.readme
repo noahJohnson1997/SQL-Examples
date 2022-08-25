@@ -1,10 +1,10 @@
-1. Create 2 views
 
-The following view is used to make information about visits more accessible to users.
-This view allows the user to see what employee visited which customers, what service was
-offered, and gives a description of the visit as well as notes for future visits to the
-property. Without thisview, users would have a hard time cross referencing all of the 
-different ID's on the separate tables.
+
+# The following view is used to make information about visits more accessible to users.
+# This view allows the user to see what employee visited which customers, what service was
+# offered, and gives a description of the visit as well as notes for future visits to the
+# property. Without thisview, users would have a hard time cross referencing all of the 
+# different ID's on the separate tables.
 
 CREATE VIEW EmployeeVisits AS
 	SELECT
@@ -26,11 +26,11 @@ CREATE VIEW EmployeeVisits AS
     	services
         on services.serviceId - visits.serviceId;
 
-The following view was also created to make information more accessible to users.
-The customer transaction view shows services offered, customer name, payment method,
-total price, as well as email and the dates the service was offered. Without this
-view, users would have a hard time cross referencing all of the different ID's on the
-separate tables.
+# The following view was also created to make information more accessible to users.
+# The customer transaction view shows services offered, customer name, payment method,
+# total price, as well as email and the dates the service was offered. Without this
+# view, users would have a hard time cross referencing all of the different ID's on the
+# separate tables.
 
 CREATE VIEW CustomerTransactions AS  
 	select 
@@ -47,11 +47,9 @@ CREATE VIEW CustomerTransactions AS
 	left join services
 		on purchases.serviceId = services.serviceId;
 
-2. Create 1 Trigger.
-
-This trigger is meant to automatically update the visit count on each purchase when
-a new visit is added to a purchase. This is to keep track of how much work was needed to
-be done before a job could be completed.
+# This trigger is meant to automatically update the visit count on each purchase when
+# a new visit is added to a purchase. This is to keep track of how much work was needed to
+# be done before a job could be completed.
 
 CREATE TRIGGER update_vist_count 
 	    AFTER INSERT ON visits
@@ -66,10 +64,11 @@ CREATE TRIGGER update_vist_count
             THEN 
     	 END;
 
-3. Queries
 
-A. Make two (2) queries that join two or more tables.
-1. SELECT
+
+# This query shows what customers purchased which services and how much they paid for them.
+
+   SELECT
 	CONCAT(firstName, " ", lastName) AS "Customer Name",
     purchaseId,
     servName as "service offered",
@@ -82,10 +81,11 @@ A. Make two (2) queries that join two or more tables.
     LEFT JOIN
     	customers
         on customers.customerId = purchases.customerId;	
-This query shows what customers purchased which services and how much they paid for them.
 
 
-2. SELECT
+# This query shows what service specialty each employee has.
+
+ SELECT
 	CONCAT(firstName, " ", lastName) AS "Employee Name",
     servName AS "Service Specialty"
     FROM
@@ -94,24 +94,22 @@ This query shows what customers purchased which services and how much they paid 
     	services
         on services.serviceId = employees.servSpec;
 
-This query shows what service specialty each employee has.
 
-B. Make two (2) queries, each using a different aggregation function from this list: MAX, MIN, AVG, COUNT, and SUM.
-	
-1. SELECT
+# this query shows what the most expensive purchase was
+
+ SELECT
 	MAX(totalPrice)
     FROM
     	purchases;
-this query shows what the most expensive purchase was
 
-2. SELECT
+# this query shows the average number of visits made per purchase.
+
+ SELECT
 	AVG(numVisits)
    FROM
 	purchases;
 
-this query shows the average number of visits made per purchase.
-
-C. Make one (1) query using one of the following in a predicate: OR, AND
+# This query returns purchases which cost more than 120$ and had fewer than 3 visits.
 
 SELECT
 	purchaseId,
@@ -126,9 +124,7 @@ LEFT JOIN
 WHERE
 	totalPrice > 120 AND numVisits < 3
 
-This query returns purchases which cost more than 120$ and had fewer than 3 visits.
-
-D. Make one (1) query using one of the following in a predicate: BETWEEN, IN, LIKE
+# This query shows all purchases which dealt with skunk removal
 
 SELECT *
 FROM purchases
@@ -136,10 +132,8 @@ LEFT JOIN services
 ON purchases.serviceId = services.serviceId
 WHERE servName like "Skunk Removal"
 
-This query shows all purchases which dealt with skunk removal
 
-Make one (1) query using  one of the following: DISTINCT, LIMIT
-
+# This query selects all of the unique services that have been performed in the visits table
 SELECT
 	DISTINCT purchaseId,
     CONCAT(firstName, " ", lastName) AS "Employee Name",
@@ -153,20 +147,21 @@ LEFT JOIN
 	services
     ON services.serviceId = visits.serviceId
 
-This query selects all of the unique services that have been performed in the visits table
 
-F. Make two (2) useful queries of your own -- and explain briefly why you created them.
+
+# This query will show all of the information from the EmployeeVisits table which is relevant to the jobs that
+# are complete.
 
 SELECT *
 FROM `EmployeeVisits`
 WHERE `Notes for future visits` = 'Job Complete'
 
-This query will show all of the information from the EmployeeVisits table which is relevant to the jobs that
-are complete.
+
+# This query shows all of the information relevant to visits which dealt with skunk removal.
 
 SELECT *
 FROM `EmployeeVisits`
 WHERE `Service Offered` = "Skunk Removal"
 
-This query shows all of the information relevant to visits which dealt with skunk removal.
+
 	
