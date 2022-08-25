@@ -8,19 +8,19 @@
 
 	CREATE VIEW EmployeeVisits AS
 	SELECT  
-    		CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",  
-    		visitId AS "Visit ID",  
-    		servName AS "Service Offered",  
-    		visitDesc AS "Visit Description",  
-    		futureNotes AS "Notes for future visits",  
-    		CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
+		CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",  
+		visitId AS "Visit ID",  
+		servName AS "Service Offered",  
+		visitDesc AS "Visit Description",  
+		futureNotes AS "Notes for future visits",  
+		CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
 	FROM visits  
 	LEFT JOIN  
-    		employees  
-    		on employees.employeeId = visits.employeeId  
+		employees  
+		on employees.employeeId = visits.employeeId  
 	LEFT JOIN   
-   		customers  
-   		on customers.customerId = visits.customerId  
+		customers  
+		on customers.customerId = visits.customerId  
 	LEFT JOIN  
 		services  
 		on services.serviceId - visits.serviceId;  
@@ -72,8 +72,7 @@
 		purchaseId,  
 		servName as "service offered",  
 		totalPrice  
-	FROM  
-		purchases  
+	FROM purchases  
 	LEFT JOIN  
 		services  
 		on services.serviceId = purchases.serviceId  
@@ -86,12 +85,12 @@
 
 	SELECT  
 		CONCAT(firstName, " ", lastName) AS "Employee Name",  
-    		servName AS "Service Specialty"  
+		servName AS "Service Specialty"  
     	FROM  
-    		employees  
+		employees  
    	LEFT JOIN  
-    		services  
-        	on services.serviceId = employees.servSpec;  
+		services  
+		on services.serviceId = employees.servSpec;  
 
 
 #### this query shows what the most expensive purchase was
@@ -112,14 +111,14 @@
 
 	SELECT  
 		purchaseId,  
-    		servName,  
-    		numVisits,  
-    		totalPrice  
+		servName,  
+		numVisits,  
+		totalPrice  
 	FROM  
 		purchases  
 	LEFT JOIN  
 		services  
-  	 	on purchases.serviceId = services.serviceId  
+		on purchases.serviceId = services.serviceId  
 	WHERE  
 		totalPrice > 120 AND numVisits < 3  
 
@@ -136,16 +135,15 @@
 	
 	SELECT  
 		DISTINCT purchaseId,  
-   		CONCAT(firstName, " ", lastName) AS "Employee Name",  
-   	 	servName  
-	FROM  
-		visits  
+		CONCAT(firstName, " ", lastName) AS "Employee Name",  
+		servName  
+	FROM visits  
 	LEFT JOIN  
 		employees  
-    		ON employees.employeeId = visits.employeeId  
+		ON employees.employeeId = visits.employeeId  
 	LEFT JOIN  
 		services  
-    		ON services.serviceId = visits.serviceId  
+		ON services.serviceId = visits.serviceId  
 
 
 
