@@ -19,7 +19,7 @@
     	LEFT JOIN  
     		employees  
     		on employees.employeeId = visits.employeeId  
-    	LEFT JOIN   
+	LEFT JOIN   
    		customers  
    		on customers.customerId = visits.customerId  
 	LEFT JOIN  
