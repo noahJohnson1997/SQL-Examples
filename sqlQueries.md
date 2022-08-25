@@ -95,17 +95,13 @@
 
 #### this query shows what the most expensive purchase was
 
-	SELECT  
-		MAX(totalPrice)  
-    	FROM  
-    		purchases;  
+	SELECT MAX(totalPrice)  
+	FROM purchases;  
 
 #### this query shows the average number of visits made per purchase.
 
-	SELECT  
-		AVG(numVisits)  
-   	FROM  
-		purchases;  
+	SELECT AVG(numVisits)  
+   	FROM purchases;  
 
 #### This query returns purchases which cost more than 120$ and had fewer than 3 visits.
 
