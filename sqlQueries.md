@@ -14,9 +14,8 @@
     		visitDesc AS "Visit Description",  
     		futureNotes AS "Notes for future visits",  
     		CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
-	FROM  
-    		visits  
-    	LEFT JOIN  
+	FROM visits  
+	LEFT JOIN  
     		employees  
     		on employees.employeeId = visits.employeeId  
 	LEFT JOIN   
@@ -54,17 +53,15 @@
 #### be done before a job could be completed.
 
 	CREATE TRIGGER update_vist_count  
-	    AFTER INSERT ON visits  
-    	FOR EACH ROW  
-        BEGIN  
-            SELECT COUNT(*) AS numVisits   
-                FROM  
-                   visits  
-                WHERE  
-                   visits.purchaseId = NEW.purchaseId  
-         	IF(numVisits > purchases.numVisits)  
-            THEN  
-    	 END;  
+		AFTER INSERT ON visits  
+	FOR EACH ROW  
+	BEGIN  
+	SELECT COUNT(*) AS numVisits   
+	FROM visits  
+	WHERE visits.purchaseId = NEW.purchaseId  
+		IF(numVisits > purchases.numVisits)  
+		THEN  
+	END;  
 
 
 
