@@ -6,15 +6,15 @@
 #### property. Without thisview, users would have a hard time cross referencing all of the 
 #### different ID's on the separate tables.
 
-    CREATE VIEW EmployeeVisits AS
-    	SELECT  
+	CREATE VIEW EmployeeVisits AS
+	SELECT  
     		CONCAT(employees.firstName, " ", employees.lastName) AS "Employee Name",  
     		visitId AS "Visit ID",  
     		servName AS "Service Offered",  
     		visitDesc AS "Visit Description",  
     		futureNotes AS "Notes for future visits",  
     		CONCAT(customers.firstName, " ", customers.lastName) AS "Customer Name"  
-    	FROM  
+	FROM  
     		visits  
     	LEFT JOIN  
     		employees  
