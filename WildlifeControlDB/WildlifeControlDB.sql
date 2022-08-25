@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 06, 2021 at 08:36 PM
--- Server version: 10.3.30-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 7.4.3
+-- Host: 127.0.0.1
+-- Generation Time: Aug 25, 2022 at 05:37 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `nj16_3_db`
 --
-CREATE DATABASE IF NOT EXISTS `nj16_3_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `nj16_3_db`;
 
 -- --------------------------------------------------------
 
@@ -46,26 +43,10 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`customerId`, `lastName`, `firstName`, `phone`, `email`, `address`, `paymentInfo`) VALUES
 (1, 'Becks', 'Charlie', '317-317-3117', 'cbecks@hotmail.com', '8267 N West St, Indianapolis IN 46251', '1111222233334444'),
-(5, 'Jackson', 'Amelia', '123-456-7890', 'jacksona1234@gmail.com', '1234 E South St, Greenwood IN 46221', '1234567891022354'),
-(6, 'Dickerson', 'Andrew', '555-666-4444', 'andydickerson@yahoo.com', '1111 Main St, Plainfield IN 46123', '1111222255556666'),
-(7, 'Noah', 'Daniel', '645-645-6451', 'dannoah@aol.com', '123 S Maple St, Greenfield IN 46000', '9999888877774444'),
-(8, 'Smith', 'John', '314-314-3145', 'smithy63@khols.com', '21 Ash Rd, Fort Wayne IN 46789', '5555666644441111');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `CustomerTransactions`
--- (See below for the actual view)
---
-CREATE TABLE `CustomerTransactions` (
-`Customer Name` varchar(71)
-,`Service Offered` varchar(100)
-,`Total Price` decimal(6,2)
-,`Payment Method` varchar(19)
-,`Customer Email` varchar(65)
-,`Service Start Date` timestamp
-,`Service End Date` timestamp
-);
+(2, 'Jackson', 'Amelia', '123-456-7890', 'jacksona1234@gmail.com', '1234 E South St, Greenwood IN 46221', '1234567891022354'),
+(3, 'Dickerson', 'Andrew', '555-666-4444', 'andydickerson@yahoo.com', '1111 Main St, Plainfield IN 46123', '1111222255556666'),
+(4, 'Noah', 'Daniel', '645-645-6451', 'dannoah@aol.com', '123 S Maple St, Greenfield IN 46000', '9999888877774444'),
+(5, 'Smith', 'John', '314-314-3145', 'smithy63@khols.com', '21 Ash Rd, Fort Wayne IN 46789', '5555666644441111');
 
 -- --------------------------------------------------------
 
@@ -97,10 +78,10 @@ INSERT INTO `employees` (`employeeId`, `lastName`, `firstName`, `phone`, `email`
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `EmployeeVisits`
+-- Stand-in structure for view `employeevisits`
 -- (See below for the actual view)
 --
-CREATE TABLE `EmployeeVisits` (
+CREATE TABLE `employeevisits` (
 `Employee Name` varchar(91)
 ,`Visit ID` int(11)
 ,`Service Offered` varchar(100)
@@ -193,20 +174,11 @@ INSERT INTO `visits` (`visitId`, `employeeId`, `serviceId`, `customerId`, `purch
 -- --------------------------------------------------------
 
 --
--- Structure for view `CustomerTransactions`
+-- Structure for view `employeevisits`
 --
-DROP TABLE IF EXISTS `CustomerTransactions`;
+DROP TABLE IF EXISTS `employeevisits`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`nj16`@`localhost` SQL SECURITY DEFINER VIEW `CustomerTransactions`  AS  select concat(`customers`.`firstName`,' ',`customers`.`lastName`) AS `Customer Name`,`services`.`servName` AS `Service Offered`,`purchases`.`totalPrice` AS `Total Price`,`customers`.`paymentInfo` AS `Payment Method`,`customers`.`email` AS `Customer Email`,`purchases`.`dateBegin` AS `Service Start Date`,`purchases`.`dateEnd` AS `Service End Date` from ((`purchases` left join `customers` on(`customers`.`customerId` = `purchases`.`customerId`)) left join `services` on(`purchases`.`serviceId` = `services`.`serviceId`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `EmployeeVisits`
---
-DROP TABLE IF EXISTS `EmployeeVisits`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`nj16`@`localhost` SQL SECURITY DEFINER VIEW `EmployeeVisits`  AS  select concat(`employees`.`firstName`,' ',`employees`.`lastName`) AS `Employee Name`,`visits`.`visitId` AS `Visit ID`,`services`.`servName` AS `Service Offered`,`visits`.`visitDesc` AS `Visit Description`,`visits`.`futureNotes` AS `Notes for future visits`,concat(`customers`.`firstName`,' ',`customers`.`lastName`) AS `Customer Name` from (((`visits` left join `employees` on(`employees`.`employeeId` = `visits`.`employeeId`)) left join `customers` on(`customers`.`customerId` = `visits`.`customerId`)) left join `services` on(`services`.`serviceId` - `visits`.`serviceId`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `employeevisits`  AS SELECT concat(`employees`.`firstName`,' ',`employees`.`lastName`) AS `Employee Name`, `visits`.`visitId` AS `Visit ID`, `services`.`servName` AS `Service Offered`, `visits`.`visitDesc` AS `Visit Description`, `visits`.`futureNotes` AS `Notes for future visits`, concat(`customers`.`firstName`,' ',`customers`.`lastName`) AS `Customer Name` FROM (((`visits` left join `employees` on(`employees`.`employeeId` = `visits`.`employeeId`)) left join `customers` on(`customers`.`customerId` = `visits`.`customerId`)) left join `services` on(`services`.`serviceId` - `visits`.`serviceId`))  ;
 
 --
 -- Indexes for dumped tables

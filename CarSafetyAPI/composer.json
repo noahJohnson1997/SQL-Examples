@@ -1,0 +1,13 @@
+{
+    "require": {
+        "slim/slim": "3.*",
+        "illuminate/database": "~5.7",
+        "respect/validation": "^2.2",
+        "firebase/php-jwt": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SafeCar\\": "api"
+        }
+    }
+}
